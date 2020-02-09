@@ -13,8 +13,8 @@ import Details from './components/Details';
 const increment = 10;
 
 const App = () => {
-  const [limit, setLimit] = useState(increment);
-  const [posY, setPosY] = useState(0);
+  const [limit, setLimit] = useState<number>(increment);
+  const [posY, setPosY] = useState<number>(0);
   
   return (
     <Router>
