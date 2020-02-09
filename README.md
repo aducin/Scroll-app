@@ -1,4 +1,4 @@
-Scroll-app is a demo add that uses infinite scroll functionality.
+Scroll-app is a demo app that uses infinite scroll functionality.
 
 Project has been developed using React (React Hooks) and TypeScript.
 Server-side data has been mocked using Json-server and Json-schema-faker.
