@@ -1,0 +1,61 @@
+{
+    "type": "array",
+    "minItems": 100,
+    "items": {
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "integer",
+            "minimum": 0,
+            "minimumExclusive": true
+        },
+        "title": {
+            "type": "string",
+            "faker": "name.title",
+            "maxLength": 255
+        },
+        "description": {
+            "type": "string",
+            "faker": "lorem.sentence",
+            "minLength": 1000,
+            "maxLength": 1024
+        },
+        "price": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+        },
+        "discount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99
+        },
+        "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+        },
+        "status": {
+            "enum": [
+                "published",
+                "in_progress",
+                "waiting_for_approval",
+                "canceled"
+            ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "faker": "date.past"
+        }
+    },
+    "required": [
+        "id",
+        "title",
+        "description",
+        "status",
+        "price",
+        "created_at"
+        ]
+    }
+}
