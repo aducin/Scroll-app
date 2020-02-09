@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { SingleOfferInterface } from '../interfaces/offer';
+import { Offer } from '../interfaces/offer';
 
-const offerStyles = {
+interface SinleOfferProps {
+    offer: Offer,
+    handleLinkClicked: (event: React.MouseEvent<HTMLElement, MouseEvent>, id: number) => void
+}
+
+const offerStyles: React.CSSProperties = {
     backgroundColor: '#f2f2f2',
     border: '2px solid #737373',
     borderRadius: '1%',
@@ -9,15 +14,16 @@ const offerStyles = {
     padding: '1em',
 };
 
-const SingleOffer: React.FC<SingleOfferInterface> = (props: SingleOfferInterface ) => {
-    const descriptionHeader = props.description.slice(0, 100);
+const SingleOffer: React.FC<SinleOfferProps> = (props: SinleOfferProps ) => {
+    const { offer } = props;
+    const descriptionHeader = offer.description.slice(0, 100);
     return <div style={offerStyles}>
-        <h3>{props.title}</h3>
+        <h3>{offer.title}</h3>
         <p>{descriptionHeader}...</p>
         <p>
             <a
-                href="/offer/{el.id}"
-                onClick={(event: React.MouseEvent<HTMLElement>) => props.handleLinkClicked(event, props.id)}
+                href={`/offers/${offer.id}`}
+                onClick={(event: React.MouseEvent<HTMLElement>) => props.handleLinkClicked(event, offer.id)}
             >See details</a>
         </p>
     </div>

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 
 import { getCollection } from '../http/http';
-import { Offer, SingleOfferInterface } from '../interfaces/offer';
+import { Offer, SinleOfferProps } from '../interfaces/offer';
 import SingleOffer from '../components/SingleOffer';
 import LoadingIndicator from '../components/Loading';
 
@@ -94,7 +94,7 @@ const List: React.FC<ListProps> = (props: ListProps) => {
             getCollection(limit, curPage)
             .then(res => {
                 if (res.data.length) {
-                    dispatch({ type: 'setResult', payload: { handleRequest, list: res.data }});
+                    dispatch({ type: 'setResult', payload: { list: res.data }});
                 } else {
                     dispatch({ type: 'listCompleted', payload: { list: [], listCompleted: true }});
                 }
@@ -117,12 +117,12 @@ const List: React.FC<ListProps> = (props: ListProps) => {
     }, [handleRequest, increment, limit, list, setLimit]);
 
     const content = list.map((el: Offer, index: number) => {
-        const props: SingleOfferInterface = {...el, handleLinkClicked: handleLinkClicked};
+        const props: SinleOfferProps = { offer: el, handleLinkClicked: handleLinkClicked };
         return <SingleOffer key={index} {...props} />
     });
     let loadingIndicator;
 
-    if (!loading) {
+    if (loading) {
         loadingIndicator = <LoadingIndicator />;
     }
 

@@ -13,19 +13,13 @@ interface DetailsProps {
     match: match<OfferParams>;
 };
 
-interface DetailsState {
-    details: Offer,
-    loading?: Boolean
+type CSSPropertiesMap = {
+    [name: string]: React.CSSProperties
 };
 
-interface DetailsReducer {
-    payload: DetailsState,
-    type: string
-};
-
-const styles = {
+const styles: CSSPropertiesMap = {
     alignRight: {
-        textAlign: 'right' as 'right'
+        textAlign: 'right'
     },
     button: {
         marginBottom: '2em',
@@ -37,32 +31,20 @@ const styles = {
         borderRadius: '1%',
         margin: '2em',
         padding: '1em',
-        textAlign: 'left' as 'left'
+        textAlign: 'left'
     },
     description: {
         fontStyle: 'italic',
-        textAlign: 'justify' as 'justify'
-    }
-}
-
-const detailsReducer = (state: DetailsState, action: DetailsReducer): DetailsState => {
-    switch (action.type) {
-        case 'setDetails':
-            return { details: action.payload.details, loading: false };
-        default:
-            return state;
+        textAlign: 'justify'
     }
 };
 
-const defaultReducerState: DetailsState = {
-    details: { id: 0, title: '', description: '', status: '', price: 0, created_at: '' },
-    loading: true
-};
+const defaultDetails = { id: 0, title: '', description: '', status: '', price: 0, created_at: '' };
 
 const Details: React.FC<DetailsProps> = (props: DetailsProps) => {
-    const [ data, dispatch ] = useReducer(detailsReducer, defaultReducerState);
+    const [ details, setDetails] = useState<Offer>({ ...defaultDetails });
+    const [ loading, setLoading] = useState<boolean>(true);
     const [ buttonHovered, setButtonHovered] = useState<boolean>(false);
-    const { details, loading } = data;
     const { history, match } = props;
 
     const buttonStyle = useCallback(() => {
@@ -76,11 +58,15 @@ const Details: React.FC<DetailsProps> = (props: DetailsProps) => {
     }, [history]);
 
     useEffect(() => {
-        getSingleOffer(String(match.params.id))
-        .then(res => {
-            dispatch({ type: 'setDetails', payload: { details: res.data }});
-        }); 
-    }, [match]);
+        if (loading) {
+            getSingleOffer(String(match.params.id))
+            .then(res => {
+                setDetails(res.data);
+                setLoading(false);
+            }); 
+        }
+        
+    }, [loading, match]);
 
     let content, created, discount, rating;
 
@@ -115,7 +101,6 @@ const Details: React.FC<DetailsProps> = (props: DetailsProps) => {
             >Go back</button>
         </React.Fragment>;
     }
-
     return <div>{content}</div>;
 };
 

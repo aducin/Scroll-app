@@ -1,5 +1,5 @@
 export interface Offer {
-    id: number | string;
+    id: number;
     title: string;
     description: string;
     status: string;
@@ -9,6 +9,7 @@ export interface Offer {
     rating?: number
 };
 
-export interface SingleOfferInterface extends Offer {
-    handleLinkClicked: any
-}
+export interface SinleOfferProps {
+    offer: Offer,
+    handleLinkClicked: (event: React.MouseEvent<HTMLElement, MouseEvent>, id: number) => void
+};
