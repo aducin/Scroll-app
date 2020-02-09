@@ -1,6 +1,6 @@
 {
     "type": "array",
-    "minItems": 100,
+    "minItems": 1000,
     "items": {
     "type": "object",
     "properties": {
