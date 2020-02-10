@@ -5,7 +5,7 @@ Scroll-app is a demo app that uses infinite scroll functionality.
 Project has been developed using React (React Hooks) and TypeScript.
 Server-side data has been mocked using [`json-server`](https://www.npmjs.com/package/json-server) and `json-schema-faker`.
 
-To run the project clone the repo locally and install project`s dependencies using `npm install` command.
+To run the project clone the repo locally and install project's dependencies using `npm install` command.
 A default file with mocked data (`db.json`) has been attached to the project.
 Alternatively it is possible to generate a different data using `json-schema-faker` (faker.json file includes a data schema):
 https://json-schema-faker.js.org/
